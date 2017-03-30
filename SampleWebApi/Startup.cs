@@ -33,7 +33,7 @@ namespace SampleWebApi
 				options.AddPolicy("Admin",
 					authBuilder =>
 					{
-						authBuilder.RequireRole("Administrators");
+						authBuilder.RequireClaim("client_role", "Administrators");
 					});
 
 			});

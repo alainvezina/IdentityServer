@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 namespace SampleWebApi.Controllers
 {
-	[Authorize(Policy = "Admin")]
+	
+	[Authorize] //Any authenticated user
 	[Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -17,8 +18,10 @@ namespace SampleWebApi.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
+
+		// GET api/values/5
+		[Authorize(Policy = "Admin")]  // Only admin user
+		[HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";

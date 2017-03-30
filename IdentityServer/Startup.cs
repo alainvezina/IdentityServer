@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer.InMemory;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,12 +12,15 @@ namespace IdentityServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+			//static configuration only for dev purpose
 			services.AddIdentityServer()
-					.AddInMemoryClients(Clients.Get())
-					.AddInMemoryIdentityResources(InMemory.Resources.GetIdentityResources())
-					.AddInMemoryApiResources(InMemory.Resources.GetApiResources())
-					.AddTestUsers(Users.Get())
+					.AddInMemoryClients(IdentityServerConfigurations.GetClients())
+					.AddInMemoryIdentityResources(IdentityServerConfigurations.GetIdentityResources())
+					.AddInMemoryApiResources(IdentityServerConfigurations.GetApiResources())
+					.AddTestUsers(IdentityServerConfigurations.GetUsers())
 					.AddTemporarySigningCredential();
+			
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
